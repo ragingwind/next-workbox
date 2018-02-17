@@ -12,8 +12,7 @@
 	"engines": {
 		"node": ">=4"
 	},
-	"scripts": {
-	},
+	"scripts": {},
 	"files": [
 		"index.js"
 	],
