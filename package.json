@@ -1,5 +1,5 @@
 {
-	"name": "@pwa/next-workbox",
+	"name": "next-workbox",
 	"version": "0.0.1",
 	"description": "Next.js plugins for workbox and PWA",
 	"license": "MIT",
@@ -7,7 +7,7 @@
 	"author": {
 		"name": "Jimmy Moon",
 		"email": "ragingwind@gmail.com",
-		"url": "ragingwind.me"
+		"url": "https://ragingwind.me"
 	},
 	"engines": {
 		"node": ">=4"
@@ -27,5 +27,7 @@
 	"publishConfig": {
 		"access": "public"
 	},
-	"dependencies": {}
+	"dependencies": {
+		"next-workbox-webpack-plugin": "^1.0.1"
+	}
 }
