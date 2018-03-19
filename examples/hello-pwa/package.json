@@ -4,7 +4,8 @@
   "scripts": {
     "build": "next build",
     "export": "next export",
-    "start": "./server.js --port=8080"
+    "dev": "next",
+    "start": "./server.js --port=3000"
   },
   "dependencies": {
     "next": "^5.0.0",

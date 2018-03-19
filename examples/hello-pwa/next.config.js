@@ -1,3 +1,5 @@
 const withWorkbox = require('../../index')
 
-module.exports = withWorkbox()
+module.exports = withWorkbox({
+  registerSW: true
+})
