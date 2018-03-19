@@ -5,7 +5,7 @@ const unregisterScript = (unregister) => `
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.ready.then(registration => {
     registration.unregister();
-    console.log('ServiceWorker has been unregistered)'
+    console.log('ServiceWorker has been unregistered')
   })
 }`
 
