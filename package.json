@@ -1,6 +1,6 @@
 {
 	"name": "next-workbox",
-	"version": "1.2.0",
+	"version": "1.3.0",
 	"description": "Next.js plugins for workbox and PWA",
 	"license": "MIT",
 	"repository": "ragingwind/next-workbox",
