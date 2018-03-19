@@ -14,9 +14,9 @@
 	},
 	"scripts": {},
 	"files": [
-    "index.js",
-    "service-worker-register.js",
-    "service-worker.js"
+		"index.js",
+		"service-worker-register.js",
+		"service-worker.js"
 	],
 	"keywords": [
 		"next",
