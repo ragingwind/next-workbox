@@ -1,5 +1,5 @@
-import React from 'react'
-import {unregisterScript, registerScript} from './service-worker-register'
+const React = require('react')
+const {unregisterScript, registerScript} = require('./service-worker-register')
 
 const ServiceWorker = ({src='/sw.js', scope='/', unregister = false, onUpdate = undefined}) => {
   return React.createElement('script', {
@@ -9,4 +9,5 @@ const ServiceWorker = ({src='/sw.js', scope='/', unregister = false, onUpdate = 
     })
 }
 
-export default ServiceWorker
+
+module.exports = ServiceWorker
