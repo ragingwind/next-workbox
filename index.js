@@ -29,41 +29,46 @@ const appendRegisterSW = (entry, content) => {
 
 module.exports = (nextConfig = {}) => {
   return Object.assign({}, nextConfig, {
-    webpack(config, {
-      isServer,
-      dev,
-      buildId,
-      defaultLoaders,
-      config: {
-        distDir
-      }
-    }) {
+    webpack(config, options) {
+			const {
+				isServer,
+				dev,
+				buildId,
+				defaultLoaders,
+				config: {
+					distDir
+				}
+			} = options
+
       if (!defaultLoaders) {
         throw new Error(
           'This plugin is not compatible with Next.js versions below 5.0.0 https://err.sh/next-plugins/upgrade'
         )
-      }
+			}
 
-      const {registerSW, ...restConfig} = nextConfig
+      const {webpack, workbox = {}} = nextConfig
 
       if (!isServer && !dev) {
         // append server-worker register script to main.js chunk
-        if (registerSW) {
-          const content = typeof registerSW === 'string' ?
-            registerSW : registerScript(defaultRegisterSW)
+        if (workbox.registerSW) {
+					const content = typeof workbox.registerSW === 'string' ?
+						workbox.registerSW : registerScript(defaultRegisterSW)
           config.entry = appendRegisterSW(config.entry, content)
         }
 
+        // cleanup params
+        delete workbox.registerSW
+
         // push workbox webpack plugin
         config.plugins.push(new NextWorkboxWebpackPlugin({
-          ...restConfig,
+          ...workbox,
           distDir,
           buildId,
         }))
       }
 
-      if (typeof restConfig.webpack === 'function') {
-        return restConfig.webpack(config, options)
+      if (typeof webpack === 'function') {
+        return webpack(config, options)
       }
 
       return config
