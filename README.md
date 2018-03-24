@@ -22,10 +22,12 @@ This next.js plugin powered by [next-workbox-webpack-plugin](https://github.com/
 const withWorkbox = require('next-workbox')
 
 module.exports = withWorkbox({
-  // https://github.com/ragingwind/next-workbox-webpack-plugin#usage
-  ...webpackOptions,
-  // register server worker script with default value or your own content
-  registerSW: true // boolean or string
+    workbox: {
+      // https://github.com/ragingwind/next-workbox-webpack-plugin#usage
+      ...webpackOptions,
+      // register server worker script with default value or your own content
+      registerSW: true // boolean or string
+    }
 })
 ```
 
@@ -65,7 +67,9 @@ alternative method is that you can set the option to append register service wor
 const withWorkbox = require('next-workbox')
 
 module.exports = withWorkbox({
-  registerSW: true
+  workbox: {
+    registerSW: true
+  }
 })
 ```
 
@@ -76,7 +80,9 @@ or with string content
 const withWorkbox = require('next-workbox')
 
 module.exports = withWorkbox({
-  registerSW: readFileSync('./register-sw.js')
+  workbox: {
+    registerSW: readFileSync('./register-sw.js')
+  }
 })
 ```
 
