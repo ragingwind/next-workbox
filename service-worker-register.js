@@ -1,15 +1,15 @@
 // Service Worker snippets from https://github.com/codebusking/vue-hn-pwa-guide-kit/tree/master/build
 // all of comments was removed to convenience reason
 
-const unregisterScript = (unregister) => `
+const unregisterScript = unregister => `
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.ready.then(registration => {
     registration.unregister();
     console.log('ServiceWorker has been unregistered')
   })
-}`
+}`;
 
-const registerScript = ({src, scope, onUpdate}) => `
+const registerScript = ({ src, scope, onUpdate }) => `
 const allowsSW = Boolean(window.location.protocol === 'https:' ||
   window.location.hostname === 'localhost' ||
   window.location.hostname === '[::1]' ||
@@ -43,8 +43,8 @@ window.addEventListener('load', function() {
       })
   }
 })
-`
+`;
 module.exports = {
   unregisterScript,
   registerScript
-}
+};
