@@ -40,17 +40,10 @@ module.exports = (nextConfig = {}) => {
       } = options;
 
       const { webpack, workbox = {} } = nextConfig;
-      const registerSW = workbox.registerSW || defaultRegisterSW;
 
       if (!isServer && !dev) {
         // append server-worker register script to main.js chunk
-        const content = typeof registerSW === 'string' ?
-          registerSW :
-          registerScript(registerSW);
-        config.entry = withSWContent(config.entry, content);
-
-        // cleanup params
-        delete workbox.registerSW;
+        config.entry = withSWContent(config.entry, registerScript(defaultRegisterSW));
 
         // push workbox webpack plugin
         config.plugins.push(

@@ -1,6 +1,5 @@
 import Document, {Head, Main, NextScript} from 'next/document'
 import flush from 'styled-jsx/server'
-import ServiceWorker from '../../../service-worker'
 
 export default class extends Document {
 	static getInitialProps({renderPage}) {
