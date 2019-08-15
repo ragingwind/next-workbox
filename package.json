@@ -25,6 +25,6 @@
 	],
 	"dependencies": {
 		"find-cache-dir": "^1.0.0",
-		"next-workbox-webpack-plugin": "1.1.0"
+		"next-workbox-webpack-plugin": "^2.1.1"
 	}
 }
