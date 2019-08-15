@@ -1,7 +1,7 @@
 const withWorkbox = require('../../index')
 
-module.exports = withWorkbox({
-  workbox: {
-    registerSW: true
+module.exports = withWorkbox({}, {
+  generateBuildId: async () => {
+    return 'my-build-id';
   }
-})
+});

@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "name": "next-workbox",
+  "alias": ["next-workbox.now.sh"],
+  "routes": [
+    { "src": "/sw.js", "dest": "_next/static/my-build-id/pages/sw.js" }
+  ],
+  "builds": [{ "src": "next.config.js", "use": "@now/next" }]
+}
