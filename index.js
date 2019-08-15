@@ -5,11 +5,11 @@ const NextWorkboxWebpackPlugin = require('next-workbox-webpack-plugin');
 const { registerScript } = require('./service-worker-register');
 
 const defaultRegisterSW = {
-  src: '/static/workbox/sw.js',
-  scope: '../../'
+  src: '/sw.js',
+  scope: '/'
 };
 
-const appendRegisterSW = (entry, content) => {
+const withSWContent = (entry, content) => {
   const originalEntry = entry;
   const output = join(
     findCacheDir({ name: 'next-workbox', create: true }),
@@ -36,27 +36,18 @@ module.exports = (nextConfig = {}) => {
         isServer,
         dev,
         buildId,
-        defaultLoaders,
         config: { distDir }
       } = options;
 
-      if (!defaultLoaders) {
-        throw new Error(
-          'This plugin is not compatible with Next.js versions below 5.0.0 https://err.sh/next-plugins/upgrade'
-        );
-      }
-
       const { webpack, workbox = {} } = nextConfig;
+      const registerSW = workbox.registerSW || defaultRegisterSW;
 
       if (!isServer && !dev) {
         // append server-worker register script to main.js chunk
-        if (workbox.registerSW) {
-          const content =
-            typeof workbox.registerSW === 'string'
-              ? workbox.registerSW
-              : registerScript(defaultRegisterSW);
-          config.entry = appendRegisterSW(config.entry, content);
-        }
+        const content = typeof registerSW === 'string' ?
+          registerSW :
+          registerScript(registerSW);
+        config.entry = withSWContent(config.entry, content);
 
         // cleanup params
         delete workbox.registerSW;
@@ -66,7 +57,9 @@ module.exports = (nextConfig = {}) => {
           new NextWorkboxWebpackPlugin({
             ...workbox,
             distDir,
-            buildId
+            buildId,
+            swDestRoot: `.next/static/${buildId}/pages`,
+            swURLRoot: `_next/static/${buildId}/pages`
           })
         );
       }

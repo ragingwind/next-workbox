@@ -15,7 +15,7 @@ yarn add next-workbox
 
 # Usage
 
-This next.js plugin powered by [next-workbox-webpack-plugin](https://github.com/ragingwind/next-workbox-webpack-plugin). which mean you can use [almost all options](https://github.com/ragingwind/next-workbox-webpack-plugin#usage) of the webpack plugin except `distDir` and `buildId`. Both thse options are overridden and handled by this plugin.
+This next.js plugin powered by [next-workbox-webpack-plugin](https://github.com/ragingwind/next-workbox-webpack-plugin). You can use [almost all options](https://github.com/ragingwind/next-workbox-webpack-plugin#usage) of the webpack plugin except `distDir` and `buildId`. Both thse options are overridden and handled by this plugin.
 
 ```js
 // next.config.js
@@ -24,9 +24,7 @@ const withWorkbox = require('next-workbox')
 module.exports = withWorkbox({
     workbox: {
       // https://github.com/ragingwind/next-workbox-webpack-plugin#usage
-      ...webpackOptions,
-      // register server worker script with default value or your own content
-      registerSW: true // boolean or string
+      ...webpackOptions
     }
 })
 ```
@@ -60,7 +58,7 @@ export default class extends Document {
 }
 ```
 
-An alternative method to do this would be to use the plugin directly by setting it up to register the service worker code into the main chunk of your application. This can easily be done by adding a `registerSW` property to your `next.config.js`. `registerSW` takes either a `boolean` or a string with a path to the script:
+An alternative method to do this would be to use the plugin directly by setting it up to register the service worker code into the main chunk of your application. This can easily be done by adding a `registerSW` property to your `next.config.js`. `registerSW` takes either an options or a string with a path to the script:
 
 ```js
 // next.config.js
@@ -68,7 +66,10 @@ const withWorkbox = require('next-workbox')
 
 module.exports = withWorkbox({
   workbox: {
-    registerSW: true
+    registerSW: {
+      src: '/static/sw.js',
+      scope: '/static/'
+    }
   }
 })
 ```
